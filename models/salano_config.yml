@@ -1,0 +1,49 @@
+models:
+  - name: customers_stg
+    description: Staged customer data from the management system with minor row-level transformation.
+    columns:
+      - name: Email
+        description: Customers' primary email for marketing and promotions.
+        tests:
+          - string_not_empty
+
+
+  - name: employees_stg
+    description: staged employees data from the management system with minor row-level transformation.
+    columns:
+      - name: JobTitle
+        description: Employees job title based on role and responsibilities.
+        tests:
+          - string_not_empty
+
+  - name: orders_stg
+    description: staged orders data from the management system with minor row-level transformation.
+    columns:
+      - name: OrderID
+        description: Unique identifier for customers' order.
+        tests:
+          - unique
+          - not_null
+
+      - name: StatusCD
+        description: "{{ doc('StatusCD') }}"
+        tests:
+          - accepted_values:
+              values: ['Shipped','Delivered','Pending','Processing','Cancelled']
+
+
+  - name: orderitems_stg
+    description: staged orderitems data from the management system with minor row-level transformation.
+    columns:
+      - name: OrderID
+        description: Unique identifier for customers' order.
+        tests:
+          - relationships:
+              to: ref('orders_stg')
+              field: OrderID
+
+  - name: orderitems_uniq
+    tests:
+      - dbt_expectations.expect_table_row_count_to_equal_other_table:
+          compare_model: ref("orders_stg")
+

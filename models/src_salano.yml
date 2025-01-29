@@ -1,0 +1,38 @@
+sources:
+  - name: landing
+    description: The landing schema/data for data transformation.
+    schema: L1_LANDING
+    freshness:
+      warn_after: {count: 1, period: day}
+      error_after: {count: 3, period: day}
+    loaded_at_field: Updated_at
+
+    tables:
+      - name: cust
+        description: Customer data for the management system.
+        identifier: customers
+      - name: stores
+        description: Stores data for the management system.
+        identifier: stores
+      - name: suppl
+        description: Suppliers data for the management system.
+        identifier: suppliers
+      - name: prod
+        description: Products data for the management system.
+        identifier: products
+      - name: ordr
+        description: Order data for the management system.
+        identifier: orders
+      - name: ordritms
+        description: orderitems data for the management system.
+        identifier: orderitems
+      - name: emp
+        description: Employees data for the management system.
+        identifier: employees
+        columns:
+          - name: address
+            description: Full address of employees.
+            tests:
+              - not_null
+              - string_not_empty
+
