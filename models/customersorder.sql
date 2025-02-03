@@ -1,3 +1,4 @@
+
 WITH CUSTOMERORDERS AS (
     SELECT
         c.CustomerID,

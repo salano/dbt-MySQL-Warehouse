@@ -1,10 +1,10 @@
 sources:
   - name: landing
     description: The landing schema/data for data transformation.
-    schema: L1_LANDING
+    schema: l1_landing #L1_LANDING
     freshness:
-      warn_after: {count: 1, period: day}
-      error_after: {count: 3, period: day}
+      warn_after: { count: 1, period: day }
+      error_after: { count: 3, period: day }
     loaded_at_field: Updated_at
 
     tables:
@@ -35,4 +35,3 @@ sources:
             tests:
               - not_null
               - string_not_empty
-
