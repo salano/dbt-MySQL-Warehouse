@@ -1,4 +1,5 @@
 select 
+    md5(O.orderDate || O.orderID) as s_key,
 	O.orderID,
     O.orderDate,
     O.CustomerID,
@@ -15,6 +16,7 @@ join
 on 
     O.orderID = OI.orderID
 GROUP BY
+    s_key,
     O.orderID,
     O.orderDate,
     O.CustomerID,

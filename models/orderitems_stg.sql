@@ -1,4 +1,5 @@
 select 
+    md5(OrderID || orderItemID) as s_key,
 	orderItemID,
     OrderID,
     productID,
